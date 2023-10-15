@@ -42,6 +42,8 @@ builder.Services.AddLogging();
 
 var app = builder.Build();
 
+app.CrateDataBaseIfNotExists();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

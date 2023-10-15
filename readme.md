@@ -24,9 +24,3 @@ run this command:
 ```
 docker compose up -d
 ```
-## IMPORTANT
-Make sure databse is created, if not run this command from api folder:
-```
-dotnet ef --project Permissions.Infrastructure.DataAccess/Permissions.Infrastructure.DataAccess.csproj --startup-project Permissions.Api/Permissions.Api.csproj database update
-```
-this should run migrations and create database

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Permissions.Domain.Models;
 using Permissions.Domain.Repositories;
 using Permissions.Infrastructure.DataAccess;
@@ -22,4 +23,13 @@ public static class DatabaseConfigExtensions
 
         return services;
     }
+    
+    public static IHost CrateDataBaseIfNotExists(this IHost host)
+    {
+        using var scope = host.Services.CreateScope();
+        var services = scope.ServiceProvider;
+        var context = services.GetRequiredService<PermissionsContext>();
+        context.Database.EnsureCreated();
+        return host;
+    }  
 }
