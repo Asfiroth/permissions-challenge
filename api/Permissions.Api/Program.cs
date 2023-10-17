@@ -1,9 +1,9 @@
-using System.Diagnostics.CodeAnalysis;
 using Mediator;
 using Permissions.Api.Middleware;
 using Permissions.Api.Validation;
 using Permissions.Infrastructure;
 using Permissions.Infrastructure.Data;
+using Permissions.Infrastructure.Elastic;
 using Permissions.Infrastructure.Event;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +14,7 @@ var configuration = builder.Configuration;
 // Add services to the container.
 builder.Services.AddDatabase(configuration);
 builder.Services.AddEventQueue(configuration);
+builder.Services.AddElasticsearchConfig(configuration);
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddMediator(options =>

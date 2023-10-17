@@ -83,6 +83,9 @@ services:
       - ConnectionStrings__SqlServer=Data Source=sqlserver,1433;User ID=sa;Password=Password123;Initial Catalog=PermissionsChallenge;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;;Persist Security Info=False;
       - Kafka__Brokers=kafka-queue:29092
       - Kafka__Topic=permission-sync-topic
+      - Elastic__Url=http://elasticsearch:9200
+      - Elastic__Index=permissions
+    depends_on: [sqlserver, kafka-queue, elasticsearch]
     ports:
       - 5080:5080
     networks:
@@ -100,15 +103,6 @@ services:
       - 3000:3000
     networks:
       - permissions_network
-
-  # permissions-worker:
-  #   image: permissions-worker
-  #   container_name: permissions-worker
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   networks:
-  #     - permissions_network
 
 volumes:
   sqlserver:

@@ -62,7 +62,7 @@ public class RegisterPermissionRequestCommandHandler : ICommandHandler<RegisterP
             EmployeeForename = command.EmployeeForename,
             EmployeeSurname = command.EmployeeSurname,
             PermissionTypeId = command.PermissionType,
-            GrantedOn = DateTime.Now
+            GrantedOn = DateTime.UtcNow
         };
         
         var newId = await _unitOfWork.PermissionsRepository.Add(newPermission);
@@ -74,6 +74,9 @@ public class RegisterPermissionRequestCommandHandler : ICommandHandler<RegisterP
         
         _logger.LogInformation("Emitting event");
         await _unitOfWork.EmitEvent(EventType.Request);
+        
+        _logger.LogInformation("Syncing with elastic");
+        await _unitOfWork.SyncWithElastic(newPermission);
         
         return newPermission;
     }

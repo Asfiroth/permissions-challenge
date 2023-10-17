@@ -75,6 +75,9 @@ public class UpdatePermissionCommandHandler : ICommandHandler<UpdatePermissionCo
         _logger.LogInformation("Emitting event {EventType}", "Modify");
         await _unitOfWork.EmitEvent(EventType.Modify);
         
+        _logger.LogInformation("Syncing with elastic");
+        await _unitOfWork.SyncWithElastic(permission);
+        
         return Unit.Value;
     }
 }

@@ -14,7 +14,7 @@ public static class EventQueueConfigExtensions
     public static void AddEventQueue(this IServiceCollection services, IConfiguration configuration)
     {
         var brokers = configuration["Kafka:Brokers"] ?? "localhost:9092";
-        var topic = configuration["Kafka:Topic"] ?? "";
+        var topic = configuration["Kafka:Topic"] ?? string.Empty;
         
         services.AddKafka(
             kafka => kafka

@@ -16,7 +16,6 @@ public class PermissionsRepository : IRepository<Permission>
     public async Task<int> Add(Permission entity)
     {
          var result = await _context.Permissions.AddAsync(entity);
-
          return result.Entity.Id;
     }
 
