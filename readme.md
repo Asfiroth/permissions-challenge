@@ -16,6 +16,7 @@ Hello and welcome, this challenge is based on building a Permission Request appl
  - [x] Web Application must use Material UI React components.
  - [x] Consume endpoints listed above.
  - [x] Write unit and integration tests for those endpoints.
+ - [x] Must integrate with elasticsearch
 
 # Run this application
 
