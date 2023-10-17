@@ -1,5 +1,6 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './App.css'
+import 'react-toastify/dist/ReactToastify.css';
 import { AppBar, Container, CssBaseline, GlobalStyles, Link, Toolbar, Typography } from '@mui/material';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';

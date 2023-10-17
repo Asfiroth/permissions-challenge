@@ -40,4 +40,9 @@ public class PermissionsRepository : IRepository<Permission>
             .AsNoTrackingWithIdentityResolution()
             .FirstOrDefaultAsync(p => p.Id == id);
     }
+
+    public Task<bool> Exists(int id)
+    {
+        return _context.Permissions.AnyAsync(p => p.Id == id);
+    }
 }

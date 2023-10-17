@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { Permission, PermissionRequest, UpdatePermissionRequest } from '../../models/permission';
-import { RequestState } from '../../models/action-state';
+import { RequestState, ToastConfig } from '../../models/action-state';
+
+import { toast } from 'react-toastify';
 
 const client = axios.create({ 
     baseURL: import.meta.env.VITE_API_URL, 
@@ -52,6 +54,7 @@ const permissionsSlice = createSlice({
         builder.addCase(getAllPermissions.rejected, (state, action) => {
             state.permissions = [];
             state.permissionsListRequestState = RequestState.FAILED;
+            toast.error('oh snap! something went wrong...', ToastConfig);
             console.error(action.error);
         });
 
@@ -61,10 +64,16 @@ const permissionsSlice = createSlice({
 
         builder.addCase(requestPermission.fulfilled, (state, _) => {
             state.permissionRequestState = RequestState.SUCCESS;
+            toast.success('Permission requested successfuly', {
+                ...ToastConfig,
+                type: 'success',
+                isLoading: false,
+              });
         });
 
         builder.addCase(requestPermission.rejected, (state, action) => {
             state.permissionRequestState = RequestState.FAILED;
+            toast.error('oh snap! something went wrong...', ToastConfig);
             console.error(action.error);
         });
 
@@ -73,11 +82,17 @@ const permissionsSlice = createSlice({
         });
 
         builder.addCase(updatePermission.fulfilled, (state, _) => {
-            state.permissionRequestState = RequestState.SUCCESS; 
+            state.permissionRequestState = RequestState.SUCCESS;
+            toast.success('Permission updated successfuly', {
+                ...ToastConfig,
+                type: 'success',
+                isLoading: false,
+              }); 
         });
 
         builder.addCase(updatePermission.rejected, (state, action) => {
             state.permissionRequestState = RequestState.FAILED;
+            toast.error('oh snap! something went wrong...', ToastConfig);
             console.error(action.error);
         });
     }

@@ -65,7 +65,7 @@ public class UpdatePermissionCommandHandler : ICommandHandler<UpdatePermissionCo
         
         permission.EmployeeForename = command.EmployeeForename;
         permission.EmployeeSurname = command.EmployeeSurname;
-        permission.PermissionTypeId = command.PermissionType;
+        permission.PermissionType = permissionType;
         
         _unitOfWork.PermissionsRepository.Update(permission);
         await _unitOfWork.Commit();
