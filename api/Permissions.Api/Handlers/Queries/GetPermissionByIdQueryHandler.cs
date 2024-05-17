@@ -19,6 +19,11 @@ public class GetPermissionByIdQueryHandler : IQueryHandler<GetPermissionByIdQuer
     public async ValueTask<PermissionResponse> Handle(GetPermissionByIdQuery query, CancellationToken cancellationToken)
     {
         var response = await _unitOfWork.PermissionsRepository.GetById(query.Id);
+        
+        if (response == null)
+        {
+            return null;
+        }
 
         return new PermissionResponse
         {

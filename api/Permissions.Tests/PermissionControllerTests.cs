@@ -59,7 +59,10 @@ public class PermissionControllerTests
     {
         // Arrange
         var theMediator = new Mock<IMediator>();
-        theMediator.Setup( mediator => mediator.Send(It.IsAny<GetAllPermissionsQuery>(), It.IsAny<CancellationToken>()))
+        theMediator.Setup( mediator => 
+                mediator.Send(It.IsAny<GetAllPermissionsQuery>(), 
+                    It.IsAny<CancellationToken>())
+                )
             .ReturnsAsync(new List<PermissionResponse>
             {
                 new()
@@ -151,7 +154,7 @@ public class PermissionControllerTests
         var result = await permissionController.Get(1);
 
         // Assert
-        var okResult = Assert.IsType<NotFoundResult>(result);
+        Assert.IsType<NotFoundResult>(result);
         Assert.NotNull(result);
     }
     
