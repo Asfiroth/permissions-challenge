@@ -2,7 +2,7 @@ using System.Runtime.Serialization;
 
 namespace Permissions.Domain.Dto;
 
-public record PermissionEvent(string Id, EventType EventType);
+public record PermissionEvent(Guid Id, EventType EventType);
 
 public enum EventType
 {

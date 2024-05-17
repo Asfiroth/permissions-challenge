@@ -32,7 +32,7 @@ public class PermissionsRepository : IRepository<Permission>
             .ToListAsync();
     }
 
-    public Task<Permission> GetById(int id)
+    public Task<Permission?> GetById(int id)
     {
         return _context.Permissions
             .Include(p => p.PermissionType)

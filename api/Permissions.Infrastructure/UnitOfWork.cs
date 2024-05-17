@@ -37,7 +37,7 @@ public class UnitOfWork : IUnitOfWork, IAsyncDisposable
 
     public Task EmitEvent(EventType type)
     {
-        var id = Guid.NewGuid().ToString();
+        var id = Guid.NewGuid();
         var permissionEvent = new PermissionEvent(id, type);
 
         return _publisher.PublishMessageAsync(permissionEvent);
@@ -62,8 +62,8 @@ public class UnitOfWork : IUnitOfWork, IAsyncDisposable
         _context.Dispose();
     }
 
-    public async ValueTask DisposeAsync()
+    public ValueTask DisposeAsync()
     {
-        await _context.DisposeAsync();
+        return _context.DisposeAsync();
     }
 }

@@ -32,7 +32,7 @@ public class PermissionEventPublisher : IPublisher<PermissionEvent>
     {
         var topic = _configuration["Kafka:Topic"] ?? "";
 
-        var messageKey = Guid.NewGuid().ToString();
+        var messageKey = Guid.NewGuid();
         
         var serialized = JsonSerializer.Serialize(message);
         
@@ -46,11 +46,11 @@ public class PermissionEventPublisher : IPublisher<PermissionEvent>
         
         if (status.Status == PersistenceStatus.Persisted)
         {
-            _logger.LogInformation($"Message with key {messageKey} was produced successfully");
+            _logger.LogInformation("Message with key {MessageKey} was produced successfully", messageKey);
         }
         else
         {
-            _logger.LogError($"Message with key {messageKey} was not produced, current status: {status.Status}");
+            _logger.LogError("Message with key {MessageKey} was not produced, current status: {StatusStatus}", messageKey, status.Status);
         }
     }
 }

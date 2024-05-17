@@ -22,13 +22,12 @@ builder.Services.AddMediator(options =>
     options.ServiceLifetime = ServiceLifetime.Transient;
 });
 
-builder.Services.AddCors(configuration => 
-    configuration.AddPolicy("CorsPolicy", policy =>
+builder.Services.AddCors(options => 
+    options.AddPolicy("CorsPolicy", policy =>
         {
             policy.AllowAnyHeader()
                 .AllowAnyMethod()
-                .AllowAnyOrigin()
-                ;
+                .AllowAnyOrigin();
         })
     );
 

@@ -24,7 +24,7 @@ public static class ElasticsearchConfigExtensions
         services.AddSingleton<IElasticClient>(client);
         services.AddSingleton(typeof(IIndexer<PermissionIndex>), typeof(ElasticsearchIndexer));
         
-        CreateIndexIfNotExists(client, index);
+        client.CreateIndexIfNotExists(index);
     }
     
     private static void CreateIndexIfNotExists(this IElasticClient client, string indexName)

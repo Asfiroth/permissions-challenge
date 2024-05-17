@@ -32,7 +32,7 @@ public class PermissionTypeRepository : IRepository<PermissionType>
             .ToListAsync();
     }
 
-    public Task<PermissionType> GetById(int id)
+    public Task<PermissionType?> GetById(int id)
     {
         return _context.PermissionTypes
             .AsNoTrackingWithIdentityResolution()
